@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: banque_221_test
+  datasource:
+    url: jdbc:h2:mem:banque_test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=PostgreSQL
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: 
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: true
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
+
+security:
+  jwt:
+    secret: YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXowMTIzNDU2Nzg5
+    expiration-ms: 86400000
+  users:
+    - name: admin
+      password: admin123
+      roles: ADMIN
+    - name: user1
+      password: user123
+      roles: USER
+    - name: agent1
+      password: agent123
+      roles: AGENT

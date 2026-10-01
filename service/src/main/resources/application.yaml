@@ -1,0 +1,46 @@
+spring:
+  application:
+    name: service
+  datasource:
+    url: jdbc:postgresql://localhost:5435/prestation_221
+    username: prestation_user
+    password: prestation_password
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    open-in-view: false
+
+server:
+  port: 8082
+
+payment:
+  base-url: ${PAYMENT_BASE_URL:http://localhost:8081}
+  auth:
+    username: ${PAYMENT_AUTH_USERNAME:}
+    password: ${PAYMENT_AUTH_PASSWORD:}
+  paths:
+    login: ${PAYMENT_LOGIN_PATH:/api/auth/login}
+    init: ${PAYMENT_INIT_PATH:/api/paiements/prestation}
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui
+    tags-sorter: alpha
+    operations-sorter: alpha
+    display-request-duration: true
+  show-actuator: false
+
+---
+spring:
+  config:
+    activate:
+      on-profile: postgres
+  datasource:
+    url: jdbc:postgresql://localhost:5432/service
+    driver-class-name: org.postgresql.Driver
+    username: service
+    password: service

@@ -1,0 +1,36 @@
+services:
+  postgres_banque:
+    image: postgres:17
+    container_name: db_banque
+    environment:
+      POSTGRES_DB: banque_221
+      POSTGRES_USER: banque_user
+      POSTGRES_PASSWORD: banque_password
+    ports:
+      - '5434:5432'
+    volumes:
+      - postgres_banque:/var/lib/postgresql/data
+    networks:
+      - banque-network
+
+  postgres_prestation:
+    image: postgres:17
+    container_name: db_prestation
+    environment:
+      POSTGRES_DB: prestation_221
+      POSTGRES_USER: prestation_user
+      POSTGRES_PASSWORD: prestation_password
+    ports:
+      - '5435:5432'
+    volumes:
+      - postgres_prestation:/var/lib/postgresql/data
+    networks:
+      - banque-network
+
+volumes:
+  postgres_banque:
+  postgres_prestation:
+
+networks:
+  banque-network:
+    driver: bridge
